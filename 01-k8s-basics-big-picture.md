@@ -1,58 +1,57 @@
-# 01 — Big Picture and Kubernetes Basics (Beginner Notes)
+# Chapter 1 — Welcome, What Kubernetes Is, and What We’ll Build
 
-## What Kubernetes is (in plain words)
-Kubernetes (often written as **K8s**) is a tool that helps you **run containers in production** without you manually managing everything.
+Welcome. In this course, we’ll learn Kubernetes from zero and then immediately do hands-on practice. Kubernetes is the de‑facto standard for deploying **containerized applications** into production. It is open source, so you can use it for free.
 
-Docker can run containers on one machine. But when you need:
-- many containers,
-- on many servers,
-- with scaling and auto-healing,
+If you already know Docker basics (what an image is, what a container is, how to build an image), you’re ready. Docker familiarity is the only prerequisite I assume.
 
-…doing it manually becomes messy. Kubernetes solves that by managing it for you.
+## What Kubernetes is (simple definition)
 
-## Why people use Kubernetes
-Kubernetes helps with:
+Kubernetes is a **container orchestration** system.
 
-### 1) Automated deployment across servers
-You tell Kubernetes: “Run my app with 5 copies.”  
-Kubernetes decides where to run those copies (which server/node).
+With Docker, you can run containers on one computer. But when you want to run **many containers** across **many servers** (physical or virtual), you quickly run into problems: where to place them, how to scale them, how to recover when one fails, and how to connect services together.
 
-### 2) Load distribution
-If you have multiple copies of your app running, Kubernetes can spread traffic across them.
+Kubernetes solves this by automating the work. You tell Kubernetes what you want, for example:
 
-### 3) Auto-scaling
-You can scale up (more copies) or scale down (fewer copies).
+“I want 5 containers of this image running.”
 
-### 4) Health checks + self-healing
-If a container crashes, Kubernetes can replace it automatically.
-
-## Kubernetes is open-source
-Kubernetes is **free** and open-source. It’s a “de facto standard” for running containerized apps in production.
+Kubernetes then:
+- deploys them across nodes (servers),
+- balances load,
+- scales up/down when needed,
+- monitors health and replaces failed containers/pods automatically.
 
 ## Why it’s called K8s
-“Kubernetes” has 10 letters.  
-Between **K** and **S** there are **8** letters → **K8s**.
 
-## Container runtimes (Docker is not the only option)
-Kubernetes runs containers using a **container runtime** on each server (node). Common runtimes mentioned:
-- Docker
-- CRI-O
-- containerd
+“Kubernetes” starts with **K** and ends with **S**. Between them there are **8 letters**. So we shorten it as **K8s**.
 
-Important idea: Kubernetes can run **without Docker**.
+## What Kubernetes takes care of
 
-## Course plan (what the lecture covers)
-This lecture goes through:
-- terminology and architecture (cluster, nodes, pods)
-- hands-on: create a local cluster (Minikube)
-- create and scale deployments
-- build a custom Docker image, push to Docker Hub, deploy it
-- use YAML files (declarative approach)
-- connect deployments together (networking + DNS)
-- switch runtime from Docker to CRI-O
+Kubernetes mainly helps with:
 
-## Tiny glossary (for this chapter)
-- **Container**: packaged app + dependencies
-- **Orchestration**: managing many containers automatically
-- **K8s/Kubernetes**: container orchestration platform
-- **Runtime**: software that actually runs the containers
+1) **Automatic deployment** of containerized apps across servers (usually virtual servers nowadays).
+
+2) **Load distribution** across multiple servers and multiple replicas so resources aren’t underutilized or overloaded.
+
+3) **Auto‑scaling** (increase/decrease the number of running containers/pods).
+
+4) **Monitoring + health checks** and **self‑healing** (replace failed containers/pods).
+
+## Container runtime (Docker is not the only option)
+
+Kubernetes runs containers using a **container runtime** on each node. Docker is one runtime, but Kubernetes also supports:
+- **CRI‑O**
+- **containerd**
+
+So Kubernetes is not bound to Docker. Later, we will switch the runtime from Docker to CRI‑O to prove it.
+
+## Course plan (what we will do in this exact order)
+
+1) Learn the terminology and key features: cluster, node, pod, and what Kubernetes does.
+2) Build a small Kubernetes cluster locally on our computers with **Minikube**.
+3) Create and scale deployments.
+4) Build a custom Docker image, push it to Docker Hub, and deploy it in Kubernetes.
+5) Create services and deployments using **YAML** files (declarative approach).
+6) Connect multiple deployments together over the network (using Kubernetes DNS and service names).
+7) Switch container runtime from Docker to CRI‑O.
+
+That’s the roadmap. Now we move into the core building blocks: pods and clusters.
